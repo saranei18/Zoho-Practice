@@ -1,0 +1,28 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <climits>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int num1, num2, base;
+    cin >> num1 >> num2 >> base;
+
+    int ans = 0, carry = 0, sum = 0, place = 1;
+
+    while (num1 || num2)
+    {
+        sum = (num1 % 10) + (num2 % 10) + carry;
+        ans += (sum % base) * place;
+        place *= 10;
+        num1 /= 10;
+        num2 /= 10;
+        carry = sum / base;
+    }
+
+    cout << ans + carry * place;
+
+    return 0;
+}
