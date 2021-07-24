@@ -1,0 +1,60 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <climits>
+#include <string>
+using namespace std;
+//{7, 1, 2, 3, 4, 5, 6}
+int hashs[10] = {0};
+int find_max(vector<int> &nums)
+{
+    int maxx = INT_MIN;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (hashs[nums[i]] == 0)
+        {
+            maxx = max(maxx, nums[i]);
+        }
+    }
+
+    return maxx;
+}
+int find_min(vector<int> &nums)
+{
+    int minn = INT_MAX;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (hashs[nums[i]] == 0)
+        {
+            minn = min(minn, nums[i]);
+        }
+    }
+
+    return minn;
+}
+int main()
+{
+    vector<int> nums{7, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 17};
+    vector<int> res;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int maxx = find_max(nums);
+        int minn = find_min(nums);
+        if (maxx != INT_MIN)
+        {
+            hashs[maxx] = 1;
+            res.push_back(maxx);
+        }
+
+        if (minn != INT_MAX)
+        {
+            hashs[minn] = 1;
+            res.push_back(minn);
+        }
+    }
+
+    for (int i = 0; i < res.size(); i++)
+        cout << res[i] << "  ";
+
+    return 0;
+}
