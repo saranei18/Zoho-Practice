@@ -1,0 +1,35 @@
+/*
+             G     
+           GR      
+         GRA       
+       GRAM        
+     GRAMP
+   GRAMPR
+ GRAMPRO
+*/
+
+#include <iostream>
+#include <algorithm>
+#include <string.h>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+    string s1 = "PROGRAM";
+    int n = s1.length() / 2;
+    string str = s1;
+    str += s1;
+    int space = s1.length();
+    for (int i = n; i < n + s1.length(); i++)
+    {
+        for (int k = 0; k < space; k++)
+            cout << " ";
+        for (int j = n; j <= i; j++)
+            cout << str[j];
+        cout << endl;
+        space--;
+    }
+
+    return 0;
+}
