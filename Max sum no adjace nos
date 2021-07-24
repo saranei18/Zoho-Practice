@@ -1,0 +1,25 @@
+
+
+#include <iostream>
+#include <algorithm>
+#include <string.h>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+    vector<int> nums{5, 5, 10, 40, 50, 35};
+
+    int incl = nums[0];
+    int excl = 0;
+    int exnew;
+
+    for (int i = 1; i < nums.size(); i++)
+    {
+        exnew = max(incl, excl);
+        incl = nums[i] + excl;
+        excl = exnew;
+    }
+    cout << max(excl, incl);
+    return 0;
+}
