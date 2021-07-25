@@ -1,0 +1,27 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <string>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+    vector<int> arr{900, 940, 950, 1100, 1500, 1800};
+    vector<int> dep{910, 1200, 1120, 1130, 1900, 2000};
+    int plat = 1;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        int plat_needed = 1;
+        for (int j = i + 1; j < dep.size(); j++)
+        {
+            if (arr[i] >= arr[j] && arr[i] <= dep[j] || arr[j] >= arr[i] && arr[j] <= dep[i])
+                plat_needed++;
+        }
+        plat = max(plat, plat_needed);
+    }
+    cout << plat;
+
+    return 0;
+}
