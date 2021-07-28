@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int helper2(int choc, int wrap)
+{
+    if (choc < wrap)
+        return 0;
+
+    int newchoc = choc / wrap;
+
+    return newchoc + helper2(newchoc + choc % wrap, wrap);
+}
+
+int helper1(int money, int price, int wrap)
+{
+    int choc = money / price;
+
+    return choc + helper2(choc, wrap);
+}
+
+int main()
+{
+    int money = 15;
+    int price = 1;
+    int wrap = 3;
+
+    cout << helper1(money, price, wrap);
+
+    return 0;
+}
