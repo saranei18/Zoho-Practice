@@ -1,0 +1,71 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+bool issafe(vector<vector<int>> nums, int row, int col)
+{
+    for (int i = 0; i < col; i++)
+    {
+        if (nums[row][i] == 1)
+            return false;
+    }
+    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
+    {
+        if (nums[i][j] == 1)
+            return false;
+    }
+    for (int i = row, j = col; i < nums.size() && j >= 0; i++, j--)
+    {
+        if (nums[i][j] == 1)
+            return false;
+    }
+
+    return true;
+}
+
+bool helper(vector<vector<int>> &nums, int col)
+{
+    int n = nums.size();
+    if (col >= n)
+        return true;
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (issafe(nums, i, col))
+        {
+            nums[i][col] = 1;
+
+            if (helper(nums, col + 1))
+                return true;
+
+            nums[i][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    vector<vector<int>> nums{{0, 0, 0, 0},
+                             {0, 0, 0, 0},
+                             {0, 0, 0, 0},
+                             {0, 0, 0, 0}};
+
+    if (helper(nums, 0) == false)
+        cout << "invalid";
+    else
+    {
+        for (int i = 0; i < nums.size(); i++)
+        {
+            for (int j = 0; j < nums[0].size(); j++)
+                cout << nums[i][j] << " ";
+            cout << endl;
+        }
+    }
+
+    return 0;
+}
